@@ -5,15 +5,19 @@ import {
   StudentResponseDto,
   UpdateStudentDto,
 } from './dto/student.dto';
+import { StudentService } from './student.service';
 
 // @decorator define basic controller,
 // params is controller name,
 // meaning all route start with "/students"
 @Controller('students')
 export class StudentController {
+  constructor(private studentService: StudentService) {}
+
   @Get() // @decorator define requests method type
   getStudents(): FindStudentResponseDto[] {
     // return 'All Students';
+    return this.studentService.getStudents();
   }
 
   @Get('/:studentId')
@@ -22,12 +26,14 @@ export class StudentController {
   ): FindStudentResponseDto {
     // console.log(studentId);
     // return `Get student by id ${studentId}`;
+    return this.studentService.getStudentById(studentId);
   }
 
   @Post()
   createStudent(@Body() body: CreateStudentDto): StudentResponseDto {
     // console.log(body);
     // return `Create student ${JSON.stringify(body)}`;
+    return this.studentService.createStudent(body);
   }
 
   @Put('/:studentId')
@@ -36,5 +42,6 @@ export class StudentController {
     @Body() body: UpdateStudentDto,
   ): StudentResponseDto {
     // return `Update student by id ${studentId} data of ${JSON.stringify(body)}`;
+    return this.studentService.updateStudentById(studentId, body);
   }
 }

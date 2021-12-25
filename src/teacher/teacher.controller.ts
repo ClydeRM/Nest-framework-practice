@@ -2,6 +2,7 @@ import { Controller, Get, Post, Param, Body, Put } from '@nestjs/common'; // bas
 import {
   CreateTeacherDto,
   FindTeacherResponseDto,
+  TeacherResponseDto,
   UpdateTeacherDto,
 } from './dto/teacher.dto';
 
@@ -20,7 +21,7 @@ export class TeacherController {
   }
 
   @Post()
-  createTeacher(@Body() body: CreateTeacherDto): ResponseTeacherDto {
+  createTeacher(@Body() body: CreateTeacherDto): TeacherResponseDto {
     // return `Create Teacher with data of ${JSON.stringify(body)}`;
   }
 
@@ -28,7 +29,7 @@ export class TeacherController {
   updateTeacher(
     @Param('teacherId') teacherId: string,
     @Body() body: UpdateTeacherDto,
-  ): ResponseTeacherDto {
+  ): TeacherResponseDto {
     // TODO: ResponseTeacherDto Data
   }
 }

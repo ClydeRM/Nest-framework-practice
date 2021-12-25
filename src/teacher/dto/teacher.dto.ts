@@ -13,5 +13,7 @@ export class TeacherResponseDto extends Teacher {}
 export class CreateTeacherDto extends Teacher {}
 
 export class UpdateTeacherDto {
+  id: string;
   name: string;
+  students?: Student[];
 }

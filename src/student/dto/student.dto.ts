@@ -11,6 +11,7 @@ export class StudentResponseDto extends Student {}
 export class CreateStudentDto extends Student {}
 
 export class UpdateStudentDto {
+  id: string;
   name: string;
   teacher: string;
 }

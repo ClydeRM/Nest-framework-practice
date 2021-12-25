@@ -1,14 +1,23 @@
-import { Controller, Get, Put } from '@nestjs/common'; // base controller class from nest
+import { Controller, Get, Put, Param, Body } from '@nestjs/common'; // base controller class from nest
+import { TeacherResponseDto } from './dto/teacher.dto';
+import {
+  UpdateStudentDto,
+  FindStudentResponseDto,
+} from '../student/dto/student.dto';
 
 @Controller('teachers/:teacherId/students')
 export class StudentTeacherController {
   @Get()
-  getStudents() {
-    return "Get teacher's all students";
+  getStudents(@Param('teacherId') teacherId: string): FindStudentResponseDto[] {
+    // return `Get ${teacherId} teacher's all students`;
   }
 
   @Put('/:studentId')
-  updateStudentTeacherById() {
-    return "Update Teacher's students by id";
+  updateStudentTeacherById(
+    @Param('teacherId') teacherId: string,
+    @Param('studentId') studentId: string,
+    @Body() body: UpdateStudentDto,
+  ): TeacherResponseDto {
+    // return `Update ${teacherId} Teacher's students by id ${studentId} data of ${JSON.stringify(body,)}`;
   }
 }

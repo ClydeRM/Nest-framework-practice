@@ -1,4 +1,4 @@
-import { Controller, Get, Put, Param } from '@nestjs/common'; // base controller class from nest
+import { Controller, Get, Put, Param, ParseUUIDPipe } from '@nestjs/common'; // base controller class from nest
 import {
   FindStudentResponseDto,
   StudentResponseDto,
@@ -10,15 +10,17 @@ export class StudentTeacherController {
   constructor(private studentsService: StudentService) {}
 
   @Get()
-  getStudents(@Param('teacherId') teacherId: string): FindStudentResponseDto[] {
+  getStudents(
+    @Param('teacherId', new ParseUUIDPipe()) teacherId: string,
+  ): FindStudentResponseDto[] {
     // return `Get ${teacherId} teacher's all students`;
     return this.studentsService.getStudentsByTeacherId(teacherId);
   }
 
   @Put('/:studentId')
   updateStudentTeacherById(
-    @Param('teacherId') teacherId: string,
-    @Param('studentId') studentId: string,
+    @Param('teacherId', new ParseUUIDPipe()) teacherId: string,
+    @Param('studentId', new ParseUUIDPipe()) studentId: string,
   ): StudentResponseDto {
     // return `Update ${teacherId} Teacher's students by id ${studentId} data of ${JSON.stringify(body,)}`;
     return this.studentsService.updateStudentTeacherById(teacherId, studentId);
